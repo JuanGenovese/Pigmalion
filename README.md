@@ -32,6 +32,17 @@ src/
 
 ---
 
+## Tecnologías y Versiones
+
+Este desarrollo se construyó utilizando las siguientes herramientas y versiones:
+- **Lenguaje**: PHP 8.2.31 (con directiva `strict_types=1`)
+- **Gestor de Dependencias**: Composer v2.x (utilizando PSR-4 Autoloading)
+- **Suite de Pruebas**: PHPUnit v10.5.63
+- **Contenedores**: Docker (imagen base `php:8.2-cli` sobre Debian Bookworm) y Docker Compose v2.x
+- **Automatización**: Wrapper escrito en Bash compatible con Unix/Linux
+
+---
+
 ## Instalación y Configuración
 
 Todas las dependencias y entornos de ejecución están contenedorizados utilizando Docker.
