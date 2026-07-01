@@ -1,72 +1,72 @@
 # Colored Rooms CLI Solver
 
-An elegant PHP CLI utility that validates, segments, and paints ASCII-art architectural floor plans with distinct ANSI colors for each room, keeping doors and exterior transitions transparent.
+Una elegante utilidad de línea de comandos (CLI) en PHP que valida, segmenta y colorea planos arquitectónicos en formato ASCII con distintos colores ANSI para cada habitación, manteniendo transparentes las puertas y las transiciones al exterior.
 
-## Features
+## Características
 
-- **Character Validation**: Ensures only wall characters (`#`) and empty spaces (` `) are parsed.
-- **Door Width & Adjacency Constraints**: Enforces that door gaps (horizontal or vertical) do not exceed a width/height of 1 cell, preventing contiguous or oversized door corridors.
-- **Closed Perimeter Validation**: Confirms that room interiors do not leak to out-of-bounds cells, enforcing airtight building perimeters.
-- **Room Segmentation**: Labels connected room spaces (using 4-directional flood-fill/BFS) into distinct rooms while ignoring doors and walls.
-- **ANSI Console Renderer**: Renders the final layout in the terminal with premium background colors for room cells while keeping walls and doors transparent.
+- **Validación de Caracteres**: Asegura que solo se procesen caracteres de pared (`#`) y espacios vacíos (` `).
+- **Restricciones de Ancho y Adyacencia de Puertas**: Garantiza que las aberturas de las puertas (horizontales o verticales) no excedan el ancho/alto de 1 celda, evitando pasillos de puertas contiguos o de gran tamaño.
+- **Validación de Perímetro Cerrado**: Confirma que el interior de las habitaciones no se filtre hacia celdas fuera de los límites, garantizando perímetros de construcción herméticos.
+- **Segmentación de Habitaciones**: Etiqueta los espacios conectados (usando flood-fill/BFS en 4 direcciones) en habitaciones distintas, ignorando puertas y paredes.
+- **Renderizador de Consola ANSI**: Renderiza el diseño final en la terminal con colores de fondo premium para las celdas de las habitaciones, mientras mantiene transparentes las paredes y las puertas.
 
 ---
 
-## Architecture & Class Design
+## Arquitectura y Diseño de Clases
 
-The project is structured under `src/` following a clean, decoupled service architecture:
+El proyecto está estructurado dentro de `src/` siguiendo una arquitectura de servicios desacoplados y limpios:
 
 ```
 src/
-├── Exception/                 # Domain validation exceptions
+├── Exception/                 # Excepciones de validación del dominio
 │   ├── ContiguousDoorsException.php
 │   ├── InvalidCharacterException.php
 │   └── OpenPerimeterException.php
 ├── Model/
-│   └── Grid.php               # Grid model representing ASCII coordinates & boundaries
+│   └── Grid.php               # Modelo de grilla que representa las coordenadas y límites ASCII
 └── Service/
-    ├── DoorDetector.php       # Detects structural doors based on wall flanking count
-    ├── Validator.php          # Validates character set, perimeter integrity, and door rules
-    ├── RoomSegmenter.php      # BFS-based connected component room segmentation
-    └── AnsiRenderer.php       # Colorizes and renders the segmented grid to terminal
+    ├── DoorDetector.php       # Detecta puertas estructurales según los muros flanqueantes
+    ├── Validator.php          # Valida el conjunto de caracteres, integridad del perímetro y reglas de puertas
+    ├── RoomSegmenter.php      # Segmentación de habitaciones basada en BFS
+    └── AnsiRenderer.php       # Colorea y renderiza la grilla segmentada en la terminal
 ```
 
 ---
 
-## Installation & Setup
+## Instalación y Configuración
 
-All dependencies and runtime environments are fully containerized using Docker.
+Todas las dependencias y entornos de ejecución están completamente contenedorizados utilizando Docker.
 
-1. **Build and install dependencies**:
+1. **Construir e instalar dependencias**:
    ```bash
    docker compose run --rm php composer install
    ```
 
 ---
 
-## Usage
+## Uso
 
-You can run the colored room solver using the provided Bash wrapper `./colorear.sh`.
+Podés ejecutar el coloreador de habitaciones utilizando el script de Bash provisto `./colorear.sh`.
 
-### 1. From a File
-Pass the floor plan file path as the first argument:
+### 1. Desde un Archivo
+Pasá la ruta del plano como primer argumento:
 ```bash
 ./colorear.sh samples/map1.txt
 ```
 
-### 2. From Standard Input (Stdin)
-Pipe the floor plan directly into the script:
+### 2. Desde la Entrada Estándar (Stdin)
+Mandá el plano directamente por tubería (pipe) al script:
 ```bash
 cat samples/map1.txt | ./colorear.sh
 ```
 
 ---
 
-## Testing
+## Tests
 
-The project is fully covered by unit tests validating the model, door detection rules, specific validation constraints, and the BFS segmentation.
+El proyecto está completamente cubierto por pruebas unitarias que validan el modelo, las reglas de detección de puertas, las restricciones específicas de validación y la segmentación BFS.
 
-Run all tests inside the PHP container:
+Corré todos los tests dentro del contenedor de PHP:
 ```bash
 docker compose run --rm php vendor/bin/phpunit tests
 ```
