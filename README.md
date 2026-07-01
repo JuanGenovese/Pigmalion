@@ -1,6 +1,17 @@
 # Pigmalion Exámen Técnico SSR
 ---
 
+## Tecnologías y Versiones
+
+Este desarrollo se construyó utilizando las siguientes herramientas y versiones:
+- **Lenguaje**: PHP 8.2.31 (con directiva `strict_types=1`)
+- **Gestor de Dependencias**: Composer v2.x (utilizando PSR-4 Autoloading)
+- **Suite de Pruebas**: PHPUnit v10.5.63
+- **Contenedores**: Docker (imagen base `php:8.2-cli` sobre Debian Bookworm) y Docker Compose v2.x
+- **Automatización**: Wrapper escrito en Bash compatible con Unix/Linux
+
+---
+
 ## Características
 
 - **Validación de Caracteres**: Asegura que solo se procesen caracteres de pared (`#`) y espacios vacíos (` `).
@@ -29,17 +40,6 @@ src/
     ├── RoomSegmenter.php      # Segmentación de habitaciones
     └── AnsiRenderer.php       # Colorea y renderiza la grilla segmentada en la terminal
 ```
-
----
-
-## Tecnologías y Versiones
-
-Este desarrollo se construyó utilizando las siguientes herramientas y versiones:
-- **Lenguaje**: PHP 8.2.31 (con directiva `strict_types=1`)
-- **Gestor de Dependencias**: Composer v2.x (utilizando PSR-4 Autoloading)
-- **Suite de Pruebas**: PHPUnit v10.5.63
-- **Contenedores**: Docker (imagen base `php:8.2-cli` sobre Debian Bookworm) y Docker Compose v2.x
-- **Automatización**: Wrapper escrito en Bash compatible con Unix/Linux
 
 ---
 
