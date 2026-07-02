@@ -23,7 +23,6 @@ class DoorDetector
             return false;
         }
 
-        // Flanked horizontally (left and right are walls)
         if ($left === '#' && $right === '#') {
             $leftIsVertical = $grid->isWall($r - 1, $c - 1) || $grid->isWall($r + 1, $c - 1);
             $rightIsVertical = $grid->isWall($r - 1, $c + 1) || $grid->isWall($r + 1, $c + 1);
@@ -32,7 +31,6 @@ class DoorDetector
             }
         }
 
-        // Flanked vertically (top and bottom are walls)
         if ($top === '#' && $bottom === '#') {
             $topIsHorizontal = $grid->isWall($r - 1, $c - 1) || $grid->isWall($r - 1, $c + 1);
             $bottomIsHorizontal = $grid->isWall($r + 1, $c - 1) || $grid->isWall($r + 1, $c + 1);

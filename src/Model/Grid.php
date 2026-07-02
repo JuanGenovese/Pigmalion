@@ -8,18 +8,16 @@ class Grid
 {
     /** @var list<string> */
     private array $rows;
-
     private int $height;
 
+    
     public function __construct(string $input)
     {
-        // Split by newline and normalize
         $lines = preg_split('/\r\n|\r|\n/', $input);
         if ($lines === false) {
             $lines = [];
         }
 
-        // Remove trailing empty line if input ended with a newline
         if (!empty($lines) && end($lines) === '') {
             array_pop($lines);
         }

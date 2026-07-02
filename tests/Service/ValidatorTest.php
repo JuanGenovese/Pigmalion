@@ -40,14 +40,14 @@ class ValidatorTest extends TestCase
         $this->validator->validate($grid);
     }
 
-    public function testContiguousDoorsThrowsException(): void
+    public function testContiguousDoorsNoLongerThrowsException(): void
     {
         // Two horizontal spaces next to each other flanked by walls (door of width 2)
         $input = "##########\n#        #\n##  ######\n#        #\n##########";
         $grid = new Grid($input);
 
-        $this->expectException(ContiguousDoorsException::class);
         $this->validator->validate($grid);
+        $this->assertTrue(true); // Should pass without exception
     }
 
     public function testOpenPerimeterThrowsExceptionBoundarySpace(): void

@@ -16,11 +16,6 @@ class RoomSegmenter
     }
 
     /**
-     * Segments the grid into distinct rooms.
-     * Returns a 2D array of the same dimensions as the grid, where each cell is:
-     * - null: if the cell is a wall, a door, or out of bounds.
-     * - int: the unique ID of the room containing this cell (starting from 1).
-     *
      * @return array<int, array<int, int|null>>
      */
     public function segment(Grid $grid): array
@@ -29,7 +24,6 @@ class RoomSegmenter
         $roomMap = [];
         $visited = [];
 
-        // Initialize maps
         for ($r = 0; $r < $height; $r++) {
             $rowLen = $grid->getRowLength($r);
             $roomMap[$r] = array_fill(0, $rowLen, null);
@@ -67,10 +61,10 @@ class RoomSegmenter
         $visited[$startR][$startC] = true;
 
         $directions = [
-            [-1, 0], // Up
-            [1, 0],  // Down
-            [0, -1], // Left
-            [0, 1]   // Right
+            [-1, 0],
+            [1, 0],
+            [0, -1],
+            [0, 1]
         ];
 
         while (!empty($queue)) {
@@ -81,7 +75,6 @@ class RoomSegmenter
                 $nr = $currR + $dr;
                 $nc = $currC + $dc;
 
-                // Check bounds using getCell (returns null if out of bounds)
                 if ($grid->getCell($nr, $nc) !== null) {
                     if ($grid->isEmpty($nr, $nc) && !$visited[$nr][$nc] && !$this->doorDetector->isDoor($grid, $nr, $nc)) {
                         $visited[$nr][$nc] = true;

@@ -23,8 +23,6 @@ class AnsiRenderer
     ];
 
     /**
-     * Renders the grid with ANSI colored rooms.
-     *
      * @param array<int, array<int, int|null>> $roomMap
      */
     public function render(Grid $grid, array $roomMap): string
@@ -39,11 +37,9 @@ class AnsiRenderer
                 $roomId = $roomMap[$r][$c] ?? null;
 
                 if ($roomId !== null) {
-                    // It's a room cell: paint background with a space character
                     $colorCode = self::ANSI_BG_COLORS[($roomId - 1) % count(self::ANSI_BG_COLORS)];
                     $output .= "\e[48;5;{$colorCode}m \e[0m";
                 } else {
-                    // It's a wall, door, or space that is not part of a room (transparent door)
                     $output .= $char;
                 }
             }
